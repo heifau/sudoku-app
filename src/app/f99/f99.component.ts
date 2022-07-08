@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import optseql, { feld, optball, optsall } from "../feld/feld.component"
+import {optseql, feld, optball, optsall } from "../feld/feld.component"
 
 const beispiele: number[][] = [
   [
@@ -40,14 +40,14 @@ const beispiele: number[][] = [
 
 
 export class brett {
-  rowcnt: number; // typ: 9
-  colcnt: number; // typ: 9
-  blkcnt: number; // typ: 9
-  rows: number[][]; // typ: [0..8][0..80]
-  cols: number[][]; // typ: [0..8][0..80]
-  blks: number[][]; // typ: [0..8][0..80]
-  felder: feld[]; // rows * cols
-  conflict: boolean;
+  rowcnt: number =9; // typ: 9
+  colcnt: number =9; // typ: 9
+  blkcnt: number =9; // typ: 9
+  rows: number[][] =[]; // typ: [0..8][0..80]
+  cols: number[][] =[]; // typ: [0..8][0..80]
+  blks: number[][] =[]; // typ: [0..8][0..80]
+  felder: feld[] =[]; // rows * cols
+  conflict: boolean =false;
   get compsum(): number {
     return this.felder.map(x => x.opts.length).reduce((a, b) => a + b);
   };
@@ -57,7 +57,7 @@ export class brett {
   get beispiele(): number[][] {
     return beispiele
   };
-  beispielidx: number;
+  beispielidx: number =0;
 }
 
 
