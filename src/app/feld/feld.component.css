@@ -1,0 +1,34 @@
+
+.fs9
+{
+    background-color:rgb(204, 17, 126);
+    display: inline;
+    position: relative;
+    border: 0;
+    padding: 0;
+}
+
+.opt {
+    background-color:rgb(241, 241, 233);
+    width: 2em;
+    text-align: center;
+}
+
+.opt.on {
+    background-color:rgb(201, 204, 17);
+    width: 2em;
+    text-align: center;
+}
+
+.abs {
+    position: absolute;
+    left: 1.5rem;
+    top: -.5rem;
+    font-size: 4em;
+    font-weight: bold;
+}
+
+.abs.hidden {
+    visibility: hidden;
+}
+

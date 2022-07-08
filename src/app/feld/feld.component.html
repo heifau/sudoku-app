@@ -1,0 +1,9 @@
+<fieldset class=fs9>
+    <span *ngFor="let o of optsall; let i=index">
+        <br *ngIf="i === 3 || i === 6">
+        <button type="button" (click)="chandler(i+1  ,$event)" class="opt" [class.on]="f.optb(i+1)">
+            {{o}}
+        </button>
+    </span>
+    <span class="abs" *ngIf="1 === f.opts.length">{{f.opts}}</span>
+</fieldset>
