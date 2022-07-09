@@ -1,63 +1,40 @@
 import { Component, OnInit } from '@angular/core';
-import {optseql, feld, optball, optsall } from "../feld/feld.component"
+import { optseql, feld, optball, optsall } from "../feld/feld.component"
 
-const beispiele: number[][] = [
-  [
-    0, 0, 0, 9, 7, 0, 0, 0, 0,
-    0, 4, 0, 2, 5, 0, 1, 0, 7,
-    0, 0, 7, 6, 0, 0, 4, 0, 3,
-    0, 1, 2, 8, 0, 0, 6, 0, 0,
-    9, 7, 0, 0, 4, 0, 0, 3, 5,
-    0, 0, 4, 0, 0, 2, 9, 1, 0,
-    2, 0, 1, 0, 0, 7, 5, 0, 0,
-    4, 0, 9, 0, 8, 1, 0, 6, 0,
-    0, 0, 0, 0, 2, 9, 0, 0, 0],
-  [
-    0, 0, 0, 2, 6, 0, 7, 0, 1,
-    6, 8, 0, 0, 7, 0, 0, 9, 0,
-    1, 9, 0, 0, 0, 4, 5, 0, 0,
-    8, 2, 0, 1, 0, 0, 0, 4, 0,
-    0, 0, 4, 6, 0, 2, 9, 0, 0,
-    0, 5, 0, 0, 0, 3, 0, 2, 8,
-    0, 0, 9, 3, 0, 0, 0, 7, 4,
-    0, 4, 0, 0, 5, 0, 0, 3, 6,
-    7, 0, 3, 0, 1, 8, 0, 0, 0],
-  [1, 0, 9, 0, 8, 0, 0, 0, 0, 0, 2, 0, 1, 0, 9, 0, 0, 0, 0, 0, 3, 0, 2, 0, 1, 9, 0, 0,
-    0, 0, 4, 0, 3, 0, 2, 0, 0, 0, 0, 0, 5, 0, 4, 0,
-    3, 4, 3, 0, 0, 0, 6, 0, 5, 0, 0, 5, 0, 0, 0, 0, 7, 0, 6, 7, 0, 6, 0, 0, 0, 0, 8, 0,
-    0, 8, 0, 7, 6, 0, 0, 0, 9],
-  [
-    5, 8, 0, 6, 0, 0, 4, 0, 0,
-    7, 0, 0, 0, 0, 3, 6, 0, 0,
-    0, 0, 0, 0, 9, 1, 0, 8, 0,
-    0, 0, 0, 0, 0, 0, 0, 0, 0,
-    0, 5, 0, 1, 8, 0, 0, 0, 3,
-    0, 0, 0, 3, 0, 6, 0, 4, 5,
-    0, 4, 0, 2, 0, 0, 0, 6, 0,
-    9, 0, 3, 0, 0, 0, 0, 0, 0,
-    0, 2, 0, 0, 0, 0, 1, 0, 0]]
-
-
+const beispiele: string[] = [
+  '000970000040250107007600403012800600970040035004002910201007500409081060000029000',
+  '000260701680070090190004500820100040004602900050003028009300074040050036703018000',
+  '109080000020109000003020190000403020000050403430006050050000706706000080080760009',
+  '580600400700003600000091080000000000050180003000306045040200060903000000020000100',
+  '000600327500702010000800600354000006090057040700000253000003000070408009431009000',
+  '214000600000049050900001000090000003000963000800000040000100004060420000003000178',
+  '123456789123456789123456789123456789123456789123456789123456789123456789123456789'
+]
 
 export class brett {
-  rowcnt: number =9; // typ: 9
-  colcnt: number =9; // typ: 9
-  blkcnt: number =9; // typ: 9
-  rows: number[][] =[]; // typ: [0..8][0..80]
-  cols: number[][] =[]; // typ: [0..8][0..80]
-  blks: number[][] =[]; // typ: [0..8][0..80]
-  felder: feld[] =[]; // rows * cols
-  conflict: boolean =false;
+  rowcnt: number = 9; // typ: 9
+  colcnt: number = 9; // typ: 9
+  blkcnt: number = 9; // typ: 9
+  rows: number[][] = []; // typ: [0..8][0..80]
+  cols: number[][] = []; // typ: [0..8][0..80]
+  blks: number[][] = []; // typ: [0..8][0..80]
+  felder: feld[] = []; // rows * cols
+  // Zeigt an, wenn Sudoku nicht mehr lösbar
+  conflict: boolean = false;
+  //Eingabemodus: Mausclicks setzten Werte nicht Optionen
+  eingabe: boolean = false;
+  // Summe der Optionen: 81 (9*9) .. 729 (9*9*9)
   get compsum(): number {
     return this.felder.map(x => x.opts.length).reduce((a, b) => a + b);
   };
-  get const(): number[] {
-    return this.felder.map(x => x.fix ? Number(x.val) : 0);
+  // Zur Ausgabe der vorgegebenen Werte in String Format: 
+  get vorgabe(): string {
+    return (this.felder.map(x => x.fix ? Number(x.val) : 0)).join("");
   };
-  get beispiele(): number[][] {
+  get beispiele(): string[] {
     return beispiele
   };
-  beispielidx: number =0;
+  beispielidx: number = 0;
 }
 
 
@@ -70,32 +47,7 @@ export class F99Component implements OnInit {
 
   optsall = optsall;
   brett: brett = new brett;
-
-
-  mschangehandler(fld: feld): void {
-    console.log("log mschangehandler");
-    console.log(fld.opts);
-    if (fld.fix) {
-      fld.valin = fld.val;
-      fld.opts = [fld.val];
-    } else if (fld.opts.length === 0) {
-      fld.val = "X"; fld.valin = fld.val;
-    } else if (fld.opts.length === 1) {
-      fld.val = fld.opts[0]; fld.valin = fld.val;
-    } else {
-      fld.val = "_"; fld.valin = fld.val;
-    }
-  }
-
-  inchangehandler(fld: feld): void {
-    console.log("log inchangehandler");
-    if (fld.valin.length === 0 || fld.valin.length > 1) {
-      fld.valin = "_"; fld.val = "_";
-      fld.opts = optsall;
-      this.brett.conflict = false;
-    }
-  }
-
+  sinput: string = "";
 
   nur1opt(opt: string, g: number[]): void {
     let fl = g.filter(x => this.brett.felder[x].opts.some(y => y === opt));
@@ -255,14 +207,14 @@ export class F99Component implements OnInit {
 
   beispielhandler(): void {
     for (let i = 0; i < this.brett.felder.length; i++) {
-      let si: number = beispiele[this.brett.beispielidx][i];
-      if (si === 0) {
+      let si: string = beispiele[this.brett.beispielidx][i];
+      if (si === '0') {
         this.brett.felder[i].opts = optsall;
         this.brett.felder[i].val = "_";
         this.brett.felder[i].fix = false;
       } else {
-        this.brett.felder[i].opts = [String(si)];
-        this.brett.felder[i].val = String(si);
+        this.brett.felder[i].opts = [si];
+        this.brett.felder[i].val = si;
         this.brett.felder[i].fix = true;
       };
       this.brett.felder[i].valin = this.brett.felder[i].val;
@@ -270,13 +222,14 @@ export class F99Component implements OnInit {
     this.brett.conflict = false;
   };
 
-
-  L0handler(): void {
+  // setze alle Werte auf "0"
+  resethandler(): void {
     for (let i = 0; i < (this.brett.felder.length); i++) {
       let nfeld = this.brett.felder[i];
       nfeld.val = "";
       nfeld.opts = optsall;
       nfeld.fix = false;
+      nfeld.eingabe = true;
       nfeld.valin = nfeld.val;
       this.brett.felder[i] = nfeld;
     };
@@ -316,11 +269,7 @@ export class F99Component implements OnInit {
       nfeld.blk = 3 * Math.floor(nfeld.row / 3) + Math.floor(nfeld.col / 3);
       nfeld.opts = optsall;
       nfeld.val = "_";
-      nfeld.fix = (1 == (i % 7));
-      if (nfeld.fix) {
-        nfeld.val = String(((i * i) % 9) + 1);
-        nfeld.opts = [nfeld.val];
-      };
+      nfeld.fix = false;
       nfeld.valin = nfeld.val;
       this.brett.felder[i] = nfeld;
     };

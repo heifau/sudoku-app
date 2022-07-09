@@ -13,11 +13,8 @@ app-feld {
 }
 
 .br0 {
-  line-height: 1.5em;
-}
-
-.br3 {
-  line-height: 2.0em;
+  display: block;
+  font-size: 0.5vh;
 }
 
 

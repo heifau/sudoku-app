@@ -1,44 +1,30 @@
-<!-- <h2>{{"Überschrift" | uppercase}} Details</h2>  -->
+<h1>{{"Sudoku" | uppercase}}</h1>
+
 <div>
-    <label>Sudoku-app {{brett.compsum}} </label>
-    <button type="button" (click)="L0handler()">Start</button>
-    <button type="button" (click)="fixithandler()">Fixit</button>
-    <select (change)="beispielhandler()" [(ngModel)]="brett.beispielidx">
-      <option *ngFor="let b of brett.beispiele; let i=index" [ngValue]="i">{{i}}</option>
-    </select>
-    <button type="button" title="1. Versteckter Single" (click)="L1handler()">L1</button>
-    <button type="button" title="2. Nackter Single" (click)="L2handler()">L2</button>
-    <button type="button" title="3. Nacktes Paar" (click)="L3handler()">L3</button>
-    <button type="button" title="4. Verstecktes Paar" (click)="L4handler()">L4</button>
-    <button type="button" title="5. Nackter Dreier" (click)="L5handler()">L5</button>
-    <button type="button" title="5. Versteckter Dreier" (click)="L6handler()">L6</button>
-    <label *ngIf="brett.conflict">Fehler!!!</label>
-    <br>
-    <!-- <span *ngFor="let fld of brett.felder">
-      <br *ngIf="fld.col === 0">
-      < !--    {{fld.id}} {{fld.row}} {{fld.col}} {{fld.blk}} 
-      <input class="einc" pattern="[0-9]|_|X" [class.bold]="fld.fix === true" [(ngModel)]="fld.valin"
-        placeholder={{fld.valin}} (change)="inchangehandler(fld)">
-      <select size="5" multiple (change)="mschangehandler(fld)" [(ngModel)]="fld.opts">
-        <option *ngFor="let f of fld.opts" [ngValue]="f">{{f}}</option>
-      </select>
-      &nbsp;
-    </span>
-  -->
-  </div>
-  
-  <div>const s1: number[] = [ {{brett.const}} ]</div>
-  
-  <span *ngFor="let fld of brett.felder">
-    <span *ngIf="fld.col === 0 && fld.row %3 !== 0"><br class="br0"></span>
-    <span *ngIf="fld.col === 0 && fld.row %3 === 0"><br class="br3"></span>
-    <span *ngIf="fld.col === 3 || fld.col === 6">&nbsp;</span>
-    <app-feld [f]="fld"></app-feld>
-  </span>
-  
-  
-  
-  
-  <!-- You will not be able to see this text.
-  
-  -->
+  <label>Sudoku-app {{brett.compsum}} (Ziel:81) </label>
+  <button type="button" (click)="resethandler()">Reset</button>
+  <button type="button" (click)="fixithandler()">Fixit</button>
+  <select (change)="beispielhandler()" [(ngModel)]="brett.beispielidx">
+    <option *ngFor="let b of brett.beispiele; let i=index" [ngValue]="i">{{i}}</option>
+  </select>
+  <button type="button" title="1. Versteckter Single" (click)="L1handler()">L1</button>
+  <button type="button" title="2. Nackter Single" (click)="L2handler()">L2</button>
+  <button type="button" title="3. Nacktes Paar" (click)="L3handler()">L3</button>
+  <button type="button" title="4. Verstecktes Paar" (click)="L4handler()">L4</button>
+  <button type="button" title="5. Nackter Dreier" (click)="L5handler()">L5</button>
+  <button type="button" title="6. Versteckter Dreier" (click)="L6handler()">L6</button>
+  <label *ngIf="brett.conflict">Fehler!!!</label>
+  <br>
+</div>
+
+<div>vorgabe : string = [ {{brett.vorgabe}} ]</div>
+<label for="sinput">Sudoku Text 0..9, blank, 81 Stück:</label>
+<input type="text" id="sinput" name="sinput" required minlength="4" maxlength="92" size="92" [(ngModel)]="sinput">
+<div>[ {{ sinput }} ]</div>
+
+<span *ngFor="let fld of brett.felder">
+  <span *ngIf="fld.col === 0" class="br0"><br></span>
+  <span *ngIf="fld.col === 0 && (fld.row%3  === 0)" class="br0"><br></span>
+  <span *ngIf="fld.col === 3 || fld.col === 6">&nbsp;</span>
+  <app-feld [f]="fld"></app-feld>
+</span>

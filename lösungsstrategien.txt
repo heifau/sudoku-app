@@ -1,0 +1,276 @@
+
+
+1. Versteckter Single
+
+Jede bereits eingetragene Zahl deckt eine Zeile, eine Spalte und einen Block ab.
+Daher kommt es sehr oft zu Situationen, in denen es für eine bestimmte Zahl innerhalb einer Einheit*
+nur ein einziges freies Feld gibt (in Block 9 passt die 7 nur noch ins grüne Feld).
+
+
+
+2. Nackter Single
+
+Das gelbe Feld liegt im Einflussbereich (selbe Reihe** oder selber Block)
+von acht der neun möglichen Zahlen. Daher passt in dieses Kästchen nur noch eine Zahl (hier: 7).
+Nackte Singles sind schwieriger zu entdecken als Versteckte,
+da hier jedes Kästchen einzeln untersucht werden muss.
+
+
+
+3. Nacktes Paar
+
+Besetzen die gleichen beiden Kandidatenwerte (hier: 2 und 4) zu zweit (also ohne andere Kandidaten)
+zwei Felder einer Einheit*, so teilen sie sich diese beiden Felder untereinander auf,
+und wir wissen zumindest, dass sie in den anderen Feldern dieser Einheit nicht weiter vorkommen können.
+Darum kann man diese beiden Werte im Rest der betroffenen Einheiten (hier: Zeile 3 und Block 2) entfernen.
+
+
+
+4. Verstecktes Paar
+
+Wenn zwei Kandidatenwerte (hier: 5 und 6) nur in zwei Feldern einer Einheit* vorhanden sind,
+kann man die anderen Kandidaten in diesen Feldern streichen,
+da diese zwei Kandidaten in keinen anderen Feldern dieser Einheit (hier: Zeile 4) sein können.
+
+
+
+5. Nackter Dreier
+
+Existieren in drei Feldern einer Einheit ausschließlich und insgesamt nur drei verschiedene Kandidaten (hier: 1, 3 und 4),
+können diese in den übrigen Feldern dieser Einheit (hier: Z1) ausgesondert werden.
+
+
+6. Versteckter Dreier
+
+Wenn insgesamt drei unterschiedliche Kandidaten in genau drei Feldern einer Einheit vorkommen (hier: 4, 5 und 7),
+können alle anderen Kandidaten in diesen Feldern entfernt werden. (Existiert oft neben Nacktem Dreier.)
+
+
+
+7. Nackter / Versteckter Vierer
+
+Existieren in vier Feldern einer Einheit (hier: Block 7) ausschließlich und insgesamt nur vier verschiedene Kandidaten
+ (hier: 4, 5, 6 und 8), können diese in den übrigen Feldern dieser Einheit ausgesondert werden.
+Wenn insgesamt vier unterschiedliche Kandidaten in genau vier Feldern einer Einheit vorkommen (hier: 1, 2, 3 und 7),
+können alle anderen Kandidaten in diesen Feldern entfernt werden.
+
+
+
+
+
+8. Reihe-Block-Check (RBC)
+
+Befinden sich in einer Reihe (hier: Z4) alle Kandidaten einer Zahl (hier: 9) auch innerhalb nur eines Blocks (hier: B5),
+werden alle weiteren Kandidaten dieses Werts in diesem Block gestrichen.
+
+
+
+
+
+
+9. Block-Reihe-Check (BRC)
+
+Liegen in einem Block (hier: B4) alle Kandidaten einer Zahl (hier: 8) in einer Reihe (hier: Z4),
+werden alle weiteren Kandidaten dieser Zahl aus dieser Reihe entfernt.
+
+
+
+
+
+
+10. Erweiterter BRC
+
+Diese Technik ist im Grunde die Kombination aus BRC und Verstecktem Single.
+Führt die durch ein BRC (hier: B7, Z7) bedingte Kandidateneliminierung (hier: eine 4 in B9) dazu,
+dass vom betroffenen Wert (hier: 4) nur noch ein Kandidat im Block (hier: Z9S7 in B9) übrig bleibt,
+so ist dieser die richtige Zahl.
+
+
+
+
+
+11. X-Wing
+
+Existiert ein Kandidatenwert (hier: 8) in zwei Zeilen (hier: Z5 und Z9) in jeweils nur zwei Feldern,
+ und liegen diese vier Felder in nur zwei Spalten (hier: S3 und S6),
+  dann können alle weiteren Kandidaten dieses Werts aus diesen beiden Spalten entfernt werden
+   (da nur möglich: Z5S3 + Z9S6 ODER Z5S6 + Z9S3).
+Dieses Prinzip gilt natürlich auch umgekehrt für Spalten, die jeweils nur zwei Kandidaten eines Werts enthalten.
+
+
+
+
+
+12. Steinbutt
+
+In einer Reihe (hier: Z3) kommt ein Kandidat nur zweimal in verschiedenen Bl�cken vor.
+Egal, welcher der Richtige ist, kommt es entweder direkt (orthogonale Reihe, linker Pfeil)
+ oder �ber eine kleine Dominokette (rechter Pfeilverlauf) zur Streichung eines Kandidaten dieses Werts
+  in einem korrespondierenden Block.
+
+
+
+
+13. Drittes Auge
+
+Im ganzen Rätsel weisen alle noch leeren Felder nur noch zwei Kandidaten auf -
+ bis auf ein Feld mit drei Kandidaten (hier: Z1S2).
+  Derjenige Kandidatenwert in diesem Feld, der dreimal in der Einheit enthalten ist,
+  ist zwingend die richtige Zahl (hier: 7). Andernfalls (falls diese 7 gestrichen würde) wäre das Sudoku nicht eindeutig.
+
+
+
+
+
+14. Wolkenkratzer
+
+Es existieren zwei parallele Reihen (hier: S4 und S8),
+die jeweils genau zweimal denselben Kandidaten aufweisen (hier: 2),
+ wobei ein Kandidat der einen Reihe mit einem Kandidaten der anderen Reihe auf gleicher H�he (hier: in Z9) liegt.
+  Eliminiert werden k�nnen nun die Kandidaten gleichen Werts, die im gemeinsamen Einflussbereich (hier: graue Umrahmung)
+   der beiden anderen Kandidaten aus Z4S4 und Z5S8 liegen.
+    In der Konstellation des Wolkenkratzers ist zumindest einer der beiden versetzt gegen�berliegenden Kandidaten der Richtige.
+
+
+
+
+
+15. Schwertfisch
+
+Der Schwertfisch ist eine Erweiterung des X-Wings. Liegen in genau drei Spalten (hier: S3, S6 und S9) alle Kandidaten eines Werts (hier: 9) in genau drei Zeilen (hier: Z5, Z6 und Z9), dann befindet sich die L�sungskombination des genannten Werts (hier: 9) irgendwo in den Schnittpunkten dieser drei Zeilen mit den drei Spalten. Letztlich teilen sich also drei Zahlen dieses Kandidatenwerts (hier also drei 9en) diese drei Zeilen und Spalten in den in Frage kommenden Schnittpunkten untereinander auf. Alle anderen Kandidaten dieses Werts k�nnen somit in den betroffenen Zeilen gestrichen werden.
+Dieses Prinzip gilt nat�rlich auch umgekehrt f�r drei Zeilen, die jeweils nur drei Kandidaten eines Werts enthalten.
+
+
+
+
+
+
+16. Drachen
+
+Ein Kandidatenwert (hier: 6) existiert in einer Zeile (hier: Z5) und einer Spalte (hier S9) je nur zweimal. Befindet sich je ein Kandidat dieser beiden Paare in einem gemeinsamen Block (hier: Block 6), kann dieser Wert im Schnittpunkt der beiden anderen Kandidaten (hier: Z7S2) eliminiert werden.
+
+
+
+
+
+17. Verbotenes Rechteck Typ 1
+
+Sudokus d�rfen vom Grundsatz her nur eine einzige L�sung haben. W�rden vier im Rechteck angeordnete Felder ausschlie�lich dieselben zwei Kandidaten enthalten (hier: 4 und 5 in den vier violetten Feldern), ginge das nur auf, wenn mehrere L�sungen existierten. Da wir aber wissen, dass ein Sudoku nur eine L�sung hat, kann diese M�glichkeit nicht stimmen. In dem Feld, das noch weitere Kandidaten enth�lt (hier: Z8S7), m�ssen daher die beiden �verbotenen� Kandidaten entfernt werden.
+
+
+
+
+
+18. Verbotenes Rechteck Typ 2
+
+Diese Strategie basiert auf derselben logischen Grundlage wie das Verbotene Rechteck Typ 1. Beim Typ 2 jedoch enthalten zwei der vier Felder dieses Rechtecks (hier: Z2S1 und Z3S1), die zudem innerhalb einer Einheit (hier: S1 bzw. B1) liegen, einen dritten, jeweils gleichen Kandidaten (hier: 5). Einer dieser beiden Kandidaten muss die richtige Zahl sein. Deshalb eliminieren wir alle anderen Kandidaten dieses Werts in den betroffenen Einheiten (hier: B1 und S1).
+
+
+
+
+
+19. Verbotenes Rechteck Typ 3
+
+Dieser Typ ist relativ kompliziert, da er viele M�glichkeiten bietet und schwer zu entdecken ist. Entscheidend ist, dass wir das Prinzip des Verbotenen Rechtecks generell verstehen und wissen, dass in mindestens einem Feld des Verbotenen Rechtecks eine andere Zahl als die beiden betroffenen Kandidaten (hier: 4 und 6) stehen muss.
+Im vorliegenden Fall w�rde also mindestens in einem der Felder Z1S2 und Z3S2 die 5 oder die 8 gesetzt werden. Unabh�ngig davon, welche letztendlich die richtige Zahl ist, f�hren alle vier M�glichkeiten in diesem Fall (5 oder 8 in Feld Z1S2 oder Z3S2) zu denselben drei dargestellten Streichungen.
+
+
+
+
+
+20. Verbotenes Rechteck Typ 4
+
+In zwei Feldern eines Verbotenen Rechtecks (hier: Z4S2 und Z6S2) befinden sich zus�tzliche Kandidaten, und unter den beiden �verbotenen� Kandidatenwerten (hier: 1 und 5) in diesen beiden Feldern ist ein Wert (hier: 1), der in keinen anderen Feldern der betroffenen Einheiten S2 bzw. B4 vorkommt. Einer dieser beiden Kandidaten (hier: 1) muss daher die richtige Zahl sein. Folglich wird in diesen Feldern der andere �verbotene� Kandidat (hier: 5) ausgemustert.
+
+
+
+
+21. XY-Wing
+
+Diese Technik ist nicht mit dem X-Wing verwandt. Es ist eher ein Nackter Dreier in Kettenfunktion. Es geht um drei Kandidaten (hier: 4, 5 und 7), die in drei Feldern drei unterschiedliche Paare bilden (und in diesen Feldern allein sind) und dabei einen kettenartigen Zusammenhang aufweisen. Diese drei Felder m�ssen sich daf�r in zwei sich �berlagernden Einheiten befinden (hier: Z1 und B2). Die beiden Enden dieser Kette haben immer einen gemeinsamen Kandidaten (hier: 5). Kandidaten dieses Werts k�nnen im gemeinsamen Einflussbereich der beiden Endfelder (dicker Rahmen) eliminiert werden.
+
+
+
+
+
+
+22. XYZ-Wing
+
+Innerhalb eines Blocks (hier: B4) und einer Reihe (hier: Z4) gibt es drei Felder (hier: t�rkis) mit insgesamt drei verschiedenen Kandidaten (hier: 2, 5 und 9), die folgende Eigenschaften haben: Einer dieser Kandidaten ist in allen drei Feldern enthalten (hier: die 2), in zwei Feldern befinden sich zwei unterschiedliche Kandidatenpaare (hier: 2,5 und 2,9), und in einem K�stchen befinden sich alle drei Kandidaten, wobei dieses K�stchen im Schnittbereich des Blocks und der Reihe liegt (dicker Rahmen). Kandidaten mit dem Wert des gemeinsamen Kandidaten (hier: 2) k�nnen im genannten Schnittbereich gestrichen werden.
+
+
+
+
+
+23. X-Kette
+
+Gibt es in einer Einheit nur zwei Kandidaten eines Werts, so ist immer einer davon der richtige und der andere falsch. Findet man mehrere solcher Kandidatenpaare eines bestimmten Werts (hier: 3) und �berschneiden sich deren Einheiten, so lassen sich logische Ketten bilden, in denen die Kandidaten abwechselnd wahr oder falsch sind. In den Feldern, die im Einflussbereich eines �wahren� und eines �falschen� Felds liegen, kann der Kandidat gestrichen werden.
+
+����
+
+
+
+
+
+24. XY-Kette
+
+Die XY-Kette ist ein um mindestens ein Kettenglied erweitertes XY-Wing. Diese Kette (hier: gelbe Felder, Enden in Z1S6 und Z2S1) hat ein Startfeld (Z2S8) und endet in beide Richtungen auf derselben Zahl (hier: 1). Daher k�nnen im Einflussbereich der beiden Endfelder die Kandidaten dieses Werts (hier: 1) gestrichen werden.
+
+����
+
+
+
+
+
+25. Schwertfisch mit Flosse
+
+Sie sehen im Beispiel einen Schwertfisch (hier: aus 3en), der durch einen weiteren Kandidaten (�Flosse�, Pfeil) gest�rt wird � es ist damit kein richtiger Schwertfisch. Dennoch kann man diese Variante nutzen: Im �berschneidungsbereich, wo sich sowohl die Flosse als auch der klassische Schwertfisch auswirken (blauer Rahmen), k�nnen die Kandidaten dieses Werts eliminiert werden.
+
+��
+
+
+
+26. W-Wing
+
+Zwei Felder enthalten ausschlie�lich die gleichen beiden Kandidaten (hier: 6 und 8 in Z2S1 und Z6S5. Diese beiden Felder bilden die Endpunkte eines imagin�ren Ws.). Das zweite Konstellationsmerkmal ist eine Reihe (hier: Z8), die einen der beiden genannten Kandidaten genau zweimal enth�lt (hier: die 6), und zwar jeweils auf H�he der beiden �W-Endpunkte�. Nun kann im �berschneidungsbereich dieser W-Endpunkte (hier: im Feld Z6S1, die mittlere Spitze des Ws) der andere der beiden Kandidaten (hier: 8) eliminiert werden. Probieren Sie�s aus: Auch falls die 6 in einem der gr�nen Felder die richtige Zahl w�re, f�hrte dies jeweils zur hier dargestellten Streichung der 8.)
+
+��
+
+
+
+27. Geklonte Paare
+
+L�sst sich mit mehreren identischen Nackten Paaren (hier: 4/9) eine mindestens vier K�stchen umfassende Kette (mindestens drei logische Schritte) bilden, dann lassen sich alle Kandidaten dieser beiden Werte streichen, die sich im Einflussbereich zweier Kettenfelder befinden, die einen Abstand von mindestens 3 oder einer anderen, ungeraden Anzahl an Schritten aufweisen.
+
+��
+
+
+
+28. Leeres Rechteck
+
+Das Leere Rechteck wird aus vier im Rechteck angeordneten Feldern innerhalb eines Blocks gebildet (hier: die hellgr�nen Felder in B4). Es bedeutet, dass in diesen vier Feldern keine Kandidaten eines bestimmten Werts (hier: 8) enthalten sind, w�hrend sowohl die diesen Block durchquerende Zeile als auch die Spalte (beide f�hren am Leeren Rechteck vorbei) je mindestens einen separaten Kandidaten dieses Werts aufweisen. Diese Konstellation hat die Funktion einer Wirkungsumleitung. (So viel zum namensgebenden Element dieser Strategie.)
+Logischer Ausgangspunkt der Anwendung ist eine Reihe, die nur zwei Kandidaten eines Werts enth�lt (hier: 8 in S6). Einer dieser Kandidaten (hier: Z2S6) w�rde sich direkt �ber die quer verlaufende Reihe (hier: Z2) auf das Zielfeld (hier: Z2S2) auswirken. Der andere Kandidat (hier: Z4S6) w�rde sich �ber die Umlenkung des Leeren Rechtecks ebenfalls auf das Zielfeld (hier: Z2S2) auswirken.
+
+��
+
+
+
+29. Doppelkette
+
+Hier lassen sich zwei geschlossene Ketten (ohne Anfang und Ende) auf denselben Feldern bilden.
+ Kommt nun ein Wert in dieser Kette innerhalb einer Einheit zweimal vor, so kann man schlie�en,
+  dass einer davon die richtige Zahl sein muss.
+   Alle anderen Kandidaten dieses Werts in dieser Einheit k�nnen daher gestrichen werden.
+
+��
+
+
+30. Forcing Chain
+
+Zwei als letzte im Feld verbliebene Kandidaten (hier: 5 und 8 im zweifarbigen Startfeld)
+ f�hren �ber zwei dominokettenartig verkn�pfte Wege zur selben Streichung (hier: die 3 in Z3S8).
+  Das hei�t, die 3 im Zielfeld wird in jedem Fall gestrichen, egal, welche Zahl im Startfeld die richtige ist.
+
+��
+
+
