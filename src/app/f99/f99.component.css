@@ -25,24 +25,6 @@ app-feld {
   width: 15em;
 }
 
-.einc {
-  width: 2em;
-  height: 3em;
-  font-size: xx-large;
-  text-align: center;
-  position: relative;
-  bottom: 1em;
-}
-
-.einc.bold {
-  width: 2em;
-  height: 3em;
-  font-size: xx-large;
-  font-weight: bold;
-  text-align: center;
-  position: relative;
-  bottom: 1em;
-}
 
 .f99 li {
   cursor: pointer;
@@ -80,4 +62,19 @@ app-feld {
   height: 1.8em;
   margin-right: .8em;
   border-radius: 4px 0 0 4px;
+}
+
+.but99 {
+  /* background-color: #4CAF50;
+  border: none;
+  color: white;
+  padding: 15px 32px;
+  */
+  margin: 0.2em;
+  /*
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  */
 }

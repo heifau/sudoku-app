@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { optseql, feld, optball, optsall } from "../feld/feld.component"
+import { worker } from "../app.component"
 
 const beispiele: string[] = [
   '000970000040250107007600403012800600970040035004002910201007500409081060000029000',
@@ -7,6 +8,7 @@ const beispiele: string[] = [
   '109080000020109000003020190000403020000050403430006050050000706706000080080760009',
   '580600400700003600000091080000000000050180003000306045040200060903000000020000100',
   '000600327500702010000800600354000006090057040700000253000003000070408009431009000',
+  '060450000400280050100000420006708000040010080000604030039000004050097003000042060',
   '214000600000049050900001000090000003000963000800000040000100004060420000003000178',
   '123456789123456789123456789123456789123456789123456789123456789123456789123456789'
 ]
@@ -24,6 +26,7 @@ export class brett {
   //Eingabemodus: Mausclicks setzten Werte nicht Optionen
   eingabe: boolean = false;
   // Summe der Optionen: 81 (9*9) .. 729 (9*9*9)
+  sinput: string = "";
   get compsum(): number {
     return this.felder.map(x => x.opts.length).reduce((a, b) => a + b);
   };
@@ -31,10 +34,15 @@ export class brett {
   get vorgabe(): string {
     return (this.felder.map(x => x.fix ? Number(x.val) : 0)).join("");
   };
+  // Zur Ausgabe der eindeutigen in String Format: 
+  get iststand(): string {
+    return (this.felder.map(x => ((x.opts.length === 1) ? Number(x.opts[0]) : 0)).join(""));
+  };
   get beispiele(): string[] {
     return beispiele
   };
   beispielidx: number = 0;
+  anzloesungen: number = 99;
 }
 
 
@@ -47,7 +55,7 @@ export class F99Component implements OnInit {
 
   optsall = optsall;
   brett: brett = new brett;
-  sinput: string = "";
+  // sinput: string = "";
 
   nur1opt(opt: string, g: number[]): void {
     let fl = g.filter(x => this.brett.felder[x].opts.some(y => y === opt));
@@ -179,7 +187,16 @@ export class F99Component implements OnInit {
         }
       }
     }
-  }
+  };
+
+
+  L99handler(): void {
+    worker.postMessage(this.brett.iststand);
+    worker.onmessage = ({ data }) => {
+      this.brett.anzloesungen = data;
+      // console.log(`page got message: ${data}`);
+    };
+  };
 
   prop2handler(): void {
     let flds = this.brett.felder;
@@ -204,6 +221,28 @@ export class F99Component implements OnInit {
       }
     }
   }
+
+  sinputngModelChange(event: any): void {
+    let si: string = this.brett.sinput;
+    const regex = /\d/g; // ziffern global, per spread ... to array
+    let numstr: string = ([...si.matchAll(regex)].join("")).padEnd(81, '0');
+    for (let i = 0; i < this.brett.felder.length; i++) {
+
+      let si: string = numstr[i];
+      if (si === '0') {
+        this.brett.felder[i].opts = optsall;
+        this.brett.felder[i].val = "_";
+        this.brett.felder[i].fix = false;
+      } else {
+        this.brett.felder[i].opts = [si];
+        this.brett.felder[i].val = si;
+        this.brett.felder[i].fix = true;
+      };
+      this.brett.felder[i].valin = this.brett.felder[i].val;
+    };
+    this.brett.conflict = false;
+  }
+
 
   beispielhandler(): void {
     for (let i = 0; i < this.brett.felder.length; i++) {

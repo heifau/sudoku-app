@@ -5,6 +5,16 @@ import { Component } from '@angular/core';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
+
 export class AppComponent {
   title = 'sudoku-app';
 }
+
+export const worker = new Worker(new URL('./app.worker', import.meta.url));
+
+/*
+worker.onmessage = ({ data }) => {
+  console.log(`page got message: ${data}`);
+};
+*/
+// worker.postMessage('hello');
